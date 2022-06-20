@@ -22,7 +22,7 @@ export default function Button({
   title,
 }: {
   'data-test-id'?: string;
-  children: JSX.Element | string | (JSX.Element | string)[];
+  children: JSX.Element | string | null | (JSX.Element | string | null)[];
   className?: string;
   disabled?: boolean;
   onClick: () => void;

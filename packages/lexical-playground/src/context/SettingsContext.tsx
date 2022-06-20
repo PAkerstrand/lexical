@@ -19,7 +19,7 @@ type SettingsContextShape = {
 };
 
 const Context: React.Context<SettingsContextShape> = createContext({
-  setOption: () => {
+  setOption: (name: SettingName, value: boolean) => {
     return;
   },
   settings: DEFAULT_SETTINGS,
@@ -28,9 +28,10 @@ const Context: React.Context<SettingsContextShape> = createContext({
 export const SettingsContext = ({
   children,
 }: {
-  children: JSX.Element | string | (JSX.Element | string)[];
+  children: JSX.Element | string | null | (JSX.Element | string | null)[];
 }): JSX.Element => {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+
   const setOption = useCallback((setting: SettingName, value: boolean) => {
     setSettings((options) => ({
       ...options,
@@ -42,9 +43,11 @@ export const SettingsContext = ({
       setURLParam(setting, value);
     }
   }, []);
+
   const contextValue = useMemo(() => {
     return {setOption, settings};
   }, [setOption, settings]);
+
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
 

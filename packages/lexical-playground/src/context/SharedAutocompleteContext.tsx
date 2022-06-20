@@ -21,7 +21,7 @@ const Context: React.Context<ContextShape> = createContext(null);
 export const SharedAutocompleteContext = ({
   children,
 }: {
-  children: JSX.Element | string | (JSX.Element | string)[];
+  children: JSX.Element | string | null | (JSX.Element | string | null)[];
 }): JSX.Element => {
   const context: ContextShape = useMemo(() => {
     let suggestion = null;

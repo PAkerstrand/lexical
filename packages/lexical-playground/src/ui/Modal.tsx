@@ -18,12 +18,12 @@ function PortalImpl({
   title,
   closeOnClickOutside,
 }: {
-  children: JSX.Element | string | (JSX.Element | string)[];
+  children: JSX.Element | string | null | (JSX.Element | string | null)[];
   closeOnClickOutside: boolean;
   onClose: () => void;
   title: string;
 }) {
-  const modalRef = useRef<HTMLDivElement>();
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (modalRef.current !== null) {
@@ -32,8 +32,8 @@ function PortalImpl({
   }, []);
 
   useEffect(() => {
-    let modalOverlayElement = null;
-    const handler = (event) => {
+    let modalOverlayElement: HTMLElement | null = null;
+    const handler = (event: KeyboardEvent) => {
       if (event.keyCode === 27) {
         onClose();
       }
@@ -88,7 +88,7 @@ export default function Modal({
   title,
   closeOnClickOutside = false,
 }: {
-  children: JSX.Element | string | (JSX.Element | string)[];
+  children: JSX.Element | string | null | (JSX.Element | string | null)[];
   closeOnClickOutside?: boolean;
   onClose: () => void;
   title: string;
